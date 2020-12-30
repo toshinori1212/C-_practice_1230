@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="~/Content/bootstrap.min.css"rel="stylesheet"/>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div class="container">
+        @if (Request.IsAuthenticated)
+        {
+            @Html.ActionLink("ログアウト","SignOut",new { Controller = "Login"})
+
+            if (User.IsInRole("Administrators"))
+            {
+                <span>|</span>
+                @Html.ActionLink("ユーザー管理","Index",new { Controller="Users"})
+            }
+        }
+    </div>
+    <div class="container">
+        <!--「＠」で始まるものはサーバーサイドで実行されるって意味！-->
+        @RenderBody()
+
+    </div>
+</body>
+</html>
